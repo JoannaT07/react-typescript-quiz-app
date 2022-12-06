@@ -7,7 +7,7 @@ type ResultCookie = {
 
 export const setCookie = (cookiename: string, value: ResultCookie[] ) => {
   Cookie.set(cookiename, JSON.stringify(value), {
-    expires: 14,
+    expires: 1,
     secure: true,
     sameSite: 'strict',
     path: '/'

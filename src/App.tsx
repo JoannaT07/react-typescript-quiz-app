@@ -1,4 +1,4 @@
-import "./App.css";
+import "../src/style/App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Menu } from "./pages/menu/Menu";
 import { Quiz } from "./pages/quiz/Quiz";

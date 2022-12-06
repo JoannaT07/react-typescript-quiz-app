@@ -32,7 +32,6 @@ export const Menu: React.FC = () => {
                 className="btn btn-category"
                 onClick={handleCategoryClick}
                 id={category.category}
-                value={category.id}
               >
                 {category.category}
               </li>

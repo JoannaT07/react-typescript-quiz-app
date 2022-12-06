@@ -13,16 +13,12 @@ export const Result: React.FC<Props> = ({ category, score }) => {
   const navigateToMenu = useNavigate();
 
   useEffect(() => {
-    console.log(category, score);
     const cookieValue = getCookie("result");
     if (cookieValue) {
       setCookie("result", [...cookieValue, { category, score }]);
     } else {
       setCookie("result", [{ category, score }]);
     }
-    const cookieValue2 = getCookie("result");
-
-    console.log(cookieValue2);
   }, [score]);
 
   return (

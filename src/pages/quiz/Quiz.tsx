@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { SelectedCategory } from "../../models/SelectedCategory";
 import { Question } from "./Question";
@@ -9,16 +8,10 @@ import { Result } from "./Result";
 export const Quiz: React.FC = () => {
   const { category } = useParams<string>();
   const [questions, setQuestions] = useState<SelectedCategory[]>([]);
-
   const [questionId, setQuestionId] = useState(0);
-  const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState<string[]>([]);
   const [score, setScore] = useState(0);
   const correctAnswerIndex = useRef(0);
-
-  // useEffect(() => {
-  //   console.log("odpowiedzi", answers);
-  //   console.log("punkty", score);
-  // }, [answers, score]);
 
   useEffect(() => {
     const categoryObj = CATEGORIES.find(
@@ -32,20 +25,23 @@ export const Quiz: React.FC = () => {
   useEffect(() => {
     console.log(questionId)
     if (questions?.length && questionId <= 9) {
-      let answers: any = [...questions[questionId].incorrect_answers];
+      let answers: string[] = [...questions[questionId].incorrect_answers];
       correctAnswerIndex.current = Math.floor(Math.random() * 4);
       answers.splice(
-        correctAnswerIndex,
+        correctAnswerIndex.current,
         0,
         questions[questionId].correct_answer
       );
+      console.log("q",questions)
+      console.log("a",answers)
+      console.log("correct",correctAnswerIndex.current)
       setAnswers(answers);
     }
   }, [questionId, questions]);
 
   return questions.length ? (
     questionId > 9 ? (
-      <Result category={category} score={score} />
+      <Result category={category!} score={score} />
     ) : (
       <div className="quiz-content">
         <div className="quiz-header">
